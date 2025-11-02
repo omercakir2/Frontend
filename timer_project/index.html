@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <main>
+        <div id="theme">
+            <input type="checkbox" name="" id="dark" checked>
+            <label for="dark" id="theme-label">Dark</label>
+        </div>
+        <p id="name">Timer App</p>
+        <div class="dot" hidden></div>
+        <div class="line"></div>
+        <div class="watch">
+            <p id="time"><span id="h">00</span>:
+                <span id="m">00</span>:
+                <span id="s">00</span>
+        </div>
+        <div id="timerDisplay"></div>
+        <div class="form">
+            <input type="text" name="Name" id="name" placeholder="Name Timer">
+            <input type="number" name="Hours" id="hour" placeholder="Hours">
+            <input type="number" name="Minute" id="min" placeholder="Minutes" max="60">
+            <input type="number" name="Second" id="sec" placeholder="Second" max="100">
+            <button>Start</button>
+            <button>Reset</button>
+            <button>Stop</button>
+        </div>
+
+
+    </main>
+</body>
+<script>
+    // Temel Değişkenler
+    let timerInterval;
+    let remainingTime = 0;
+    let isRunning = false;
+    let timerName = "Timer";
+
+    // DOM Elementleri
+    const nameInput = document.querySelector('.form input[name="Name"]');
+    const hourInput = document.getElementById('hour');
+    const minInput = document.getElementById('min');
+    const secInput = document.getElementById('sec');
+    const startButton = document.querySelector('.form button:nth-child(5)'); // 5. element: Start butonu
+    const resetButton = document.querySelector('.form button:nth-child(6)'); // 6. element: Reset butonu
+    const stopButton = document.querySelector('.form button:nth-child(7)'); // 7. element: Stop butonu
+    const form = document.querySelector('.form');
+
+    const nameDisplay = document.getElementById('name');
+    const hDisplay = document.getElementById('h');
+    const mDisplay = document.getElementById('m');
+    const sDisplay = document.getElementById('s');
+    const timerDisplay = document.getElementById('timerDisplay'); // Geri sayım bittiğinde mesaj gösterebiliriz
+
+
+    const isDark = document.getElementById('dark');
+    const dot = document.querySelector('.dot');
+    const line = document.querySelector('.line');
+
+    // --- Fonksiyonlar ---
+
+    // 1. Geri sayım süresini saniyelere çevirir
+    function getTimeInSeconds() {
+        const hours = parseInt(hourInput.value) || 0;
+        const minutes = parseInt(minInput.value) || 0;
+        const seconds = parseInt(secInput.value) || 0;
+
+        return (hours * 3600) + (minutes * 60) + seconds;
+    }
+
+    // 2. Geri sayımı günceller ve ekranda gösterir
+    function updateTimerDisplay() {
+        if (remainingTime < 0) remainingTime = 0;
+
+        const h = Math.floor(remainingTime / 3600);
+        const m = Math.floor((remainingTime % 3600) / 60);
+        const s = remainingTime % 60;
+
+        // Tek haneli sayıların başına sıfır ekler (ör: 05)
+        hDisplay.textContent = String(h).padStart(2, '0');
+        mDisplay.textContent = String(m).padStart(2, '0');
+        sDisplay.textContent = String(s).padStart(2, '0');
+
+        // Zamanlayıcı bittiğinde
+        if (remainingTime <= 0) {
+            clearInterval(timerInterval);
+            isRunning = false;
+
+        }
+    }
+
+    // 3. Zamanlayıcıyı başlatır
+    function startTimer() {
+
+
+
+        if (isRunning) return; // Zaten çalışıyorsa tekrar başlatma
+
+        // Başlatmadan önce süreyi ve ismi al
+        if (remainingTime === 0) {
+            remainingTime = getTimeInSeconds();
+            timerName = nameInput.value || "Your Timer";
+            nameDisplay.textContent = timerName;
+        }
+
+        if (remainingTime <= 0) {
+            timerDisplay.textContent = "Lütfen geçerli bir süre giriniz.";
+            return;
+        }
+
+        isRunning = true;
+        dot.hidden = false;
+
+        // Her saniye geri sayımı gerçekleştir
+        timerInterval = setInterval(() => {
+            remainingTime--;
+            updateTimerDisplay();
+        }, 1000);
+    }
+
+    // 4. Zamanlayıcıyı durdurur
+    function stopTimer() {
+        clearInterval(timerInterval);
+        isRunning = false;
+        dot.hidden = true;
+
+
+    }
+
+    // 5. Zamanlayıcıyı sıfırlar
+    function resetTimer() {
+        dot.hidden = true;
+        clearInterval(timerInterval);
+        isRunning = false;
+        remainingTime = 0;
+        timerName = "Name";
+
+        // Ekranı sıfırla
+        hDisplay.textContent = '00';
+        mDisplay.textContent = '00';
+        sDisplay.textContent = '00';
+        nameDisplay.textContent = "Timer App";
+
+        // Giriş alanlarını sıfırla
+        hourInput.value = '';
+        minInput.value = '';
+        secInput.value = '';
+        nameInput.value = '';
+
+        timerDisplay.textContent = "";
+    }
+
+    function changeTheme() {
+        if (isDark.checked) {
+            document.body.style.color = "white";
+            document.body.style.backgroundColor = "black";
+        } else {
+            document.body.style.color = "black";
+            document.body.style.backgroundColor = "gray";
+        }
+    }
+    // --- Olay Dinleyicileri (Event Listeners) ---
+    startButton.addEventListener('click', startTimer);
+    stopButton.addEventListener('click', stopTimer);
+    resetButton.addEventListener('click', resetTimer);
+    isDark.addEventListener('click', changeTheme);
+    // Başlangıçta ekranı ayarla
+    updateTimerDisplay();
+</script>
+
+</html>

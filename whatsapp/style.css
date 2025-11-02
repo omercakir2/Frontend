@@ -1,0 +1,194 @@
+/*
+ * WhatsApp Renk Paleti
+ * --wa-dark-teal: #075E54 (Başlık çubuğu/ana aksan)
+ * --wa-light-teal: #128C7E (Daha açık aksan)
+ * --wa-bg-chat: #ECE5DD (Ana sohbet ekranı arka planı)
+ * --wa-bg-sidebar: #FFFFFF (Sohbet listesi arka planı - Modern görünüm)
+ * --wa-bubble-sent: #DCF8C6 (Gönderilen mesaj)
+ * --wa-bubble-received: #FFFFFF (Alınan mesaj)
+ * --wa-divider: #E1E1E1 (Ayırıcı çizgiler)
+ */
+
+body {
+    /* Genel uygulama arka planı (Sohbet ekranı arka planı gibi) */
+    background-color: #ECE5DD; 
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    max-width: 100vw;
+}
+
+aside {
+    height: 100vh;
+    width: 30vw;
+    /* Sohbet listesi alanı, modern WhatsApp'ta beyaz/açık gridir. */
+    background: #FFFFFF;
+    border-right: 1px solid #F2F2F2;
+}
+
+aside #whatsapp {
+    /* Burası normalde koyu yeşil başlık çubuğu olurdu, 
+       ancak layout'a göre sadece logo/yazı alanı olarak kalmıştır. */
+    background-color: #075E54; 
+    color: white;
+    padding: 15px 0;
+    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+aside #whatsapp img {
+    width: 40px;
+    /* WhatsApp logosu beyaz olmalı */
+
+}
+
+aside #whatsapp p {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+aside .chats {
+    /* Sohbet listesi, sidebar ile aynı arka planı kullanır, gereksiz arka plan kaldırıldı. */
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0;
+    padding-top: 10px;
+}
+
+aside .chats .chat {
+    margin-left: 20px;
+    padding: 10px 0; /* Tıklama alanını genişletmek için */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    border-bottom: 1px solid #F2F2F2; /* Sohbetler arasına ayırıcı çizgi */
+}
+
+aside .chats .chat:last-child {
+    border-bottom: none;
+}
+
+aside .chats .chat img {
+    width: 40px;
+    border-radius: 50%;
+}
+
+section {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    width: 70vw;
+    /* Sabitleme (fixed) kullandığımız için bu dağılım kuralını kaldırıyoruz. */
+    justify-content: flex-start; 
+}
+section .top{
+    /* Sohbet başlığı çubuğu */
+    background-color: #ededed; 
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* Eski renkli border kaldırıldı, hafif bir box-shadow daha iyi durur. */
+    border-bottom: 1px solid #E1E1E1; 
+    gap: 15px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+section .top img{
+    width: 45px; /* Daha küçük ve modern hale getirildi */
+    border-radius: 50%;
+}
+section .top p{
+    font-size: 18px; /* Daha küçük hale getirildi */
+    font-weight: 500;
+}
+
+section .messages{
+    /* Mesaj alanı tüm boşluğu doldurur */
+    flex-grow: 1; 
+    overflow-y: auto; /* Mesajlar dolduğunda kaydırma çubuğu */
+    padding: 20px 0;
+    
+    display: flex;
+    flex-direction: column;
+    /* Sabit input çubuğunun altında kalmaması için alttan boşluk bırakıldı */
+    padding-bottom: 80px; 
+}
+
+/* Gönderilen Mesaj Balonu (Açık Yeşil) */
+section .messages .send {
+    /* Border kaldırıldı, daha yumuşak bir görünüm için */
+    border: none;
+    display: inline-block; 
+    align-self: flex-end; 
+    margin: 5px 20px 5px 100px; /* Soldan biraz daha fazla boşluk */
+    padding: 9px 12px; 
+    border-radius: 7px; /* Daha az yuvarlak */
+    /* WhatsApp'ın Açık Yeşil Rengi */
+    background-color: #DCF8C6; 
+    box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.13);
+}
+
+/* Alınan Mesaj Balonu (Beyaz) */
+section .messages .receive {
+    margin: 5px 100px 5px 20px; /* Sağdan biraz daha fazla boşluk */
+    /* Border kaldırıldı */
+    border: none;
+    display: inline-block;
+    align-self: flex-start; 
+    padding: 9px 12px; 
+    border-radius: 7px;
+    /* Saf Beyaz */
+    background-color: #FFFFFF; 
+    box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.13);
+}
+
+/* Input Çubuğu Alanı - SABİT KONUMLANDIRMA */
+section .input-bar-area {
+    position: fixed; /* Ekranın altı sabitlenir */
+    bottom: 0; /* En alta yapıştır */
+    left: 30vw; /* Aside'ın genişliği kadar sağdan başla */
+    width: 70vw; /* Section'ın genişliği kadar yer kapla */
+    
+    background-color: #F0F0F0; 
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box; /* Padding'in genişliği artırmamasını sağlar */
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+}
+
+section .messages input{
+    /* Input stili güncellendi */
+    padding: 15px;
+    /* margin-inline ve margin-top kaldırıldı, input-bar-area kullanılıyor */
+    margin-inline: 15px; 
+    flex-grow: 1;
+    border: 1px solid #ccc;
+    border-radius: 20px; /* Yuvarlak input */
+}
+
+
+@media (max-width: 768px) {
+    aside {
+        display: none;
+    }
+    section {
+        width: 100vw;
+    }
+    
+    /* Mobil'de Sabit Input Bar ayarları */
+    section .input-bar-area {
+        left: 0;     /* Aside gizlendiği için soldan sıfırla */
+        width: 100vw; /* Tüm ekranı kapla */
+    }
+}
+
+

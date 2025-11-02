@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>ChatGPT Sidebar</title>
+</head>
+
+<body>
+
+
+    <main style="height: 100vh;">
+        <aside>
+            <div class="new_chat"> <span><img src="icons/plus.svg" alt="" style="position: relative; top:3px;"> New
+                    Chat</span></div>
+            <h3 style="color:#999">Today</h3>
+            <div class="chats">
+                <div class="chat"><img src="icons/msg.svg" alt=""> When should i change to winter tires?</div>
+                <div class="chat"><img src="icons/msg.svg" alt=""> About upcoming frontend technologies midterm</div>
+                <div class="chat"><img src="icons/msg.svg" alt=""> Centering div</div>
+            </div>
+            <h3 style="color:#999">Yesterday</h3>
+            <div class="chats">
+                <div class="chat"><img src="icons/msg.svg" alt=""> <span>Econ108 midterm practice</span></div>
+                <div class="chat"><img src="icons/msg.svg" alt="">Email to step Challange GE250</div>
+
+            </div>
+        </aside>
+
+        <section>
+            <div id="versions">
+                <div id="version1">
+                    <p>GPT3.5</p>
+                    <img src="icons/flash.svg" alt="">
+
+                </div>
+
+
+                <div id="version2">
+
+                    <img src="icons/stars.svg" alt="">
+                    <p>GPT4</p>
+                    <img src="icons/lock.svg" alt="">
+                </div>
+            </div>
+            <div class="info">
+                <p>
+                    Our fastest model,great for daily use!
+                </p>
+            </div>
+            <h2 style="color: gray">ChatGPT</h2>
+
+            <div class="suggestions">
+                <div class="info">
+                    <h3>Give me ideas</h3>
+                </div>
+                <div class="info">
+                    <h3>Recomend Actities</h3>
+                </div>
+            </div>
+            <div id="input">
+                <input type="text" placeholder="Type a message..."
+                    style="font-size:1.2em; box-shadow: 0 0 15px rgba(0 0 0 / 0.1);">
+                <img src="icons/mic.svg" alt="">
+            </div>
+        </section>
+    </main>
+
+
+</body>
+<script>
+    let infoDiv = document.querySelector(".info"); // Changed variable name to avoid conflict with 'info' class
+    let version1 = document.getElementById("version1");
+
+
+    infoDiv.style.opacity="0";
+    version1.addEventListener("mouseover", function() {
+        infoDiv.style.opacity = "1"; // Set opacity to 0 on hover
+        infoDiv.style.transition = "opacity 0.5s ease-in-out"; // Add a smooth transition
+    });
+
+    version1.addEventListener("mouseout", function() {
+        infoDiv.style.opacity = "0"; // Reset opacity to 1 when not hovered
+    });
+
+</script>
+</html>

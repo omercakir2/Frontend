@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <a href="/" id="link"> Sıfırla</a>
+    <div id="main">
+        <h1 class="message">Aşkım seni çok seviyorum &hearts;</h1>
+        <button class="button" id="button">Buraya Tıkla &heartsuit;</button>
+        <img src="cats.jpg" alt="" id="image" style="visibility: hidden;">
+    </div>
+</body>
+<script>
+    let button = document.getElementById("button");
+    let image = document.getElementById("image");
+    let link = document.getElementById("link");
+    button.addEventListener("mouseover", function () {
+        button.textContent = "Tıkla!";
+    });
+    let escapes = 0;
+
+    button.addEventListener("mouseover", function () {
+        if (escapes < 5) { // en fazla 5 kere kaçsın
+            let x = Math.random() * (window.innerWidth - button.offsetWidth);
+            let y = Math.random() * (window.innerHeight - button.offsetHeight);
+            button.style.position = "absolute";
+            button.style.left = `${x}px`;
+            button.style.top = `${y}px`;
+            escapes++;
+        }
+    });
+
+    button.addEventListener("click", function () {
+        button.style.opacity = 0.0;
+        image.style.visibility = "visible";
+        link.style.visibility="visible";
+    });
+
+
+
+
+</script>
+
+</html>
