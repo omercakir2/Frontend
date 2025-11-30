@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q2</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <div id="region">
+            <script>
+                
+                let circles = []
+                
+                while(circles.length < 100){
+                    let diameter = parseInt(Math.random()*90+10)
+                    let radius = diameter/2
+
+
+                    let left = parseInt(Math.random()*(500-diameter))
+                    let Top = parseInt(Math.random()*(500-diameter))
+
+                    
+
+
+
+                    let r,g,b;
+                    r = parseInt(Math.random()*255)
+                    g = parseInt(Math.random()*255)
+                    b = parseInt(Math.random()*255)
+
+                    
+                    let circle = {x:left+radius,y:Top+radius,r:radius}
+                    
+                    if(!isCollapse(circles,circle)){
+                        circles.push(circle)
+                        document.write(`<div class="circle" style="left:${left}px; top:${Top}px; width:${diameter}px; height:${diameter}px; background:rgb(${r},${g},${b})"></div>`)
+                    }
+                }
+
+                function isCollapse(circles,circle){
+                    for(let c of circles){
+                        let dsquare =  (square(c.x-circle.x) + square(c.y-circle.y))
+                        if(dsquare < square(c.r + circle.r)){
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+                function square(a){
+                    return a*a
+                }
+            </script>
+
+        </div>
+        <h2>Press F5 or command+R to refresh</h2>
+    </main>
+</body>
+</html>

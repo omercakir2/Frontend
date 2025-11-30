@@ -1,0 +1,30 @@
+main{
+    display: flex;
+    flex-direction: column;
+}
+main h2{
+    text-align: center;
+}
+.products{
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+}
+.product{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border: 1px solid gray;
+    border-radius: 1.2rem;
+}
+.product .top{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+}
+.product .bottom{
+    display: flex;
+    justify-content: right;
+    color: orange;
+}

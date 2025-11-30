@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q1</title>
+</head>
+<body>
+    <script>
+        let arr = []
+        for(let i = 0 ; i < 5 ; i++){
+            let temp = parseInt(Math.random()*20)
+            while(check(arr,temp)){
+                temp = parseInt(Math.random()*20)
+            }
+            arr[i] = temp
+        }
+        print(arr)
+
+
+        arr.sort((a,b)=> a-b)
+        document.write(`<div>Median : ${arr[2]}</div>`)
+
+        function check(arr,val){
+            for(let item of arr){
+                if(item==val){
+                    return true
+                }
+            }
+            return false
+        }
+        function print(arr){
+            document.write(`Array: [${arr}]`)
+            
+        }
+    </script>
+</body>
+</html>

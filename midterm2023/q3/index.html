@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q3</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <script src="q3-db.js"></script>
+    <main>
+        <h2>
+            e-Commerce System
+        </h2>
+        <div class="products">
+            <script>
+                for (let i = 0; i < 3; i++) {
+                    document.write(`<div class="product">
+                                        <div class="top">
+                                            <img src="images/${products[i].image}" alt="">
+                                            <span>${products[i].name}</span>
+                                        </div>
+                                        <div class="bottom">
+                                            $${products[i].price}
+                                        </div>
+                                    </div>`)
+
+                }
+            </script>
+        </div>
+        <div class="form">
+            <form name="form">
+
+                <label for="user">User:</label>
+                <select name="user" id="">
+                    <script>
+                        for(let user of users){
+                            document.write(`<option value="${user.userId}">${user.name}</option>`)
+                        }
+                    </script>
+                </select>
+
+                <label for="subtotal">SubTotal:</label>
+                <input type="checkbox" name="subtotal">
+
+                <button type="button" onclick="showOrders()">Show Orders</button>
+
+                <textarea name="textArea" id="" cols="100" rows="10" readonly></textarea>
+            </form>
+        </div>
+    </main>
+    <script src="functions.js"></script>
+</body>
+
+</html>
